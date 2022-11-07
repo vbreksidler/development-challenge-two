@@ -1,0 +1,14 @@
+{
+  "resourceName": "dynamoPatientDB",
+  "tableName": "patient-db",
+  "partitionKey": {
+    "fieldName": "name",
+    "fieldType": "string"
+  },
+  "sortKey": {
+    "fieldName": "email",
+    "fieldType": "string"
+  },
+  "gsi": [],
+  "triggerFunctions": []
+}
