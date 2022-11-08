@@ -64,7 +64,6 @@ app.get(path + hashKeyPath, function (req, res) {
   condition[partitionKeyName] = {
     ComparisonOperator: 'EQ'
   }
-
   if (userIdPresent && req.apiGateway) {
     condition[partitionKeyName]['AttributeValueList'] = [req.apiGateway.event.requestContext.identity.cognitoIdentityId || UNAUTH];
   } else {
@@ -220,7 +219,7 @@ app.delete(path + '/object' + hashKeyPath + sortKeyPath, function (req, res) {
       res.statusCode = 500;
       res.json({ error: err, url: req.url });
     } else {
-      res.json({ url: req.url, data: data });
+      res.json({ url: req.url, data: 'deleted' });
     }
   });
 });

@@ -13,6 +13,8 @@ function Form() {
     const [address, setAddress] = React.useState('');
     const [patients, setPatients] = React.useState([]);
 
+    //fazer otimizacao na renderizacao da lista de patients
+
     useEffect(() => {
         API.get('patientRegisterAPI', '/patients/name')
             .then((res => setPatients([...patients, ...res])))
@@ -20,7 +22,6 @@ function Form() {
 
     const handleSubmit = e => {
         e.preventDefault()
-
         API.post('patientRegisterAPI', '/patients', {
             body: {
                 name,
@@ -33,6 +34,19 @@ function Form() {
         });
     }
 
+    const deletePatient = (patient) => {
+        return patients.filter(obj => obj.name !== patient.name);
+    }
+
+    const handleDelete = async (patient) => {
+        const response = await API.del('patientRegisterAPI', '/patients/object' + `/${patient.name}/${patient.email}`)
+        if (response.data === 'deleted') {
+            let newPatients = deletePatient(patient)
+            setPatients([...newPatients])
+        } else {
+            <div>Error</div>
+        }
+    }
 
     return (
         <div className="Form">
@@ -47,7 +61,7 @@ function Form() {
                     </button>
                 </form>
                 <table>
-                    <thead>
+                    <thead className='table_header'>
                         <tr>
                             <th>Name</th>
                             <th>Birth Date</th>
@@ -55,13 +69,19 @@ function Form() {
                             <th>Address</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody className='table_body'>
                         {patients.map((patient, index) =>
                             <tr key={index}>
                                 <td>{patient.name}</td>
                                 <td>{patient.birthDate}</td>
                                 <td>{patient.email}</td>
                                 <td>{patient.address}</td>
+                                <td>
+                                    <button onClick={() => handleDelete(patient)}
+                                    >
+                                        Delete Patient
+                                    </button>
+                                </td>
                             </tr>
                         )}
                     </tbody>
