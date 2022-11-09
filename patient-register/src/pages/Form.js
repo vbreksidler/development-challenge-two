@@ -2,6 +2,7 @@ import Amplify, { API } from 'aws-amplify'
 import config from '../aws-exports'
 import { withAuthenticator } from '@aws-amplify/ui-react'
 import React, { useEffect } from 'react';
+import styles from './styles.module.scss';
 
 Amplify.configure(config);
 
@@ -106,9 +107,10 @@ function Form() {
 
 
     return (
-        <div className="Form">
-            <table>
-                <thead className='table_header'>
+        <div className={styles.content}>
+            Patients Manager
+            <table className={styles.table}>
+                <thead>
                     <tr>
                         <th>Name</th>
                         <th>Birth Date</th>
@@ -116,7 +118,7 @@ function Form() {
                         <th>Address</th>
                     </tr>
                 </thead>
-                <tbody className='table_body'>
+                <tbody>
                     {patients.map((patient, index) =>
                         <tr key={index}>
                             <td>{patient.name}</td>
@@ -124,9 +126,9 @@ function Form() {
                             <td>{patient.email}</td>
                             <td>{patient.address}</td>
                             <td>
-                                <button onClick={() => handleDelete(patient)}
+                                <button className={styles.button_table} onClick={() => handleDelete(patient)}
                                 >
-                                    Delete Patient
+                                    Delete
                                 </button>
                             </td>
                             <td>
@@ -138,7 +140,7 @@ function Form() {
                                     setAddress(patient.address)
                                 }}
                                 >
-                                    Edit Patient
+                                    Edit
                                 </button>
                             </td>
                         </tr>
