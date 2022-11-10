@@ -40,9 +40,9 @@ function Form() {
         }).then(setAdd(false));
     }
 
-    const handleSubmitEdit = async e => {
-        e.preventDefault()
-        const response = await API.put('patientRegisterAPI', '/patients', {
+    const handleSubmitEdit = data => {
+        console.log(data)
+        const response = API.put('patientRegisterAPI', '/patients', {
             body: {
                 name,
                 birthDate: newBirthDate,
@@ -73,13 +73,37 @@ function Form() {
     const addEditForm = () => {
         if (edit) {
             let editField =
-                <form onSubmit={handleSubmitEdit}>
+                <form onSubmit={handleSubmit(handleSubmitEdit)}>
                     <input value={name} placeholder={name} disabled></input>
-                    <input value={newBirthDate} placeholder="New Birth Date" onChange={(e) => setNewBirthDate(e.target.value)}></input>
-                    <input value={newAddress} placeholder="New Address" onChange={(e) => setNewAddress(e.target.value)}></input>
+                    <input
+                        {...register("newBirthDate", {
+                            required: true,
+                            pattern: regexDate,
+                        })}
+                        value={newBirthDate}
+                        placeholder="New Birth-Date"
+                        onChange={(e) => setNewBirthDate(e.target.value)}
+                    />
+                    <input
+                        {...register("newAddress", {
+                            required: true,
+                            pattern: regexAddress,
+                        })}
+                        value={newAddress}
+                        placeholder="New Address"
+                        onChange={(e) => setNewAddress(e.target.value)}
+                    />
                     <button>
                         Save
                     </button>
+                    {errors.newBirthDate?.type === 'required' && <span> Birth-date field is required.</span>}
+                    {errors.newBirthDate?.type === 'pattern' && <span> Invalid date, please use the format: 12/01/1994</span>}
+                    {errors.newAddress?.type === 'required' && <span> Address field is required.</span>}
+                    {
+                        errors.newAddress?.type === 'pattern' && <span> Invalid date, please use the format:
+                            Rua Exemplo, 999 - apt454, Bairro - Cidade, Estado
+                        </span>
+                    }
                 </form>
             return editField
         } else {
@@ -141,7 +165,7 @@ function Form() {
                     {errors.birthDate?.type === 'pattern' && <span> Invalid date, please use the format: 12/01/1994</span>}
                     {errors.address?.type === 'required' && <span> Address field is required.</span>}
                     {errors.address?.type === 'pattern' && <span> Invalid date, please use the format:
-                        Rua Acelino Grande, 125 - casa, Santa Felicidade - Curitiba, PR
+                        Rua Exemplo, 999 - apt454, Bairro - Cidade, Estado
                     </span>}
                 </section>
             return addField

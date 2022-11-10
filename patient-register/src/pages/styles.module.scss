@@ -6,6 +6,11 @@
     }
 }
 
+fieldset {
+    width: 20%;
+    margin: 1%;
+}
+
 
 html {
     font-family: Montserrat, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, BlinkMacSystemFont, Helvetica Neue, Arial, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
@@ -57,6 +62,7 @@ html {
 }
 
 button {
+    margin: 2px;
     padding-left: 20px;
     padding-right: 20px;
     height: 35px;
