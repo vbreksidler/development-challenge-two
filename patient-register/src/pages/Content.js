@@ -8,7 +8,8 @@ import { regexAddress, regexDate, regexEmail, regexName } from '../utils/regex'
 
 Amplify.configure(config);
 
-function Form() {
+function Content() {
+    // mudar para context se possivel
     const [name, setName] = React.useState('');
     const [birthDate, setBirthDate] = React.useState('');
     const [email, setEmail] = React.useState('');
@@ -18,7 +19,7 @@ function Form() {
     const [add, setAdd] = React.useState(false)
     const [newBirthDate, setNewBirthDate] = React.useState('')
     const [newAddress, setNewAddress] = React.useState('')
-
+    const [newButton, setNewButton] = React.useState(true)
     const { register, handleSubmit, formState: { errors } } = useForm();
 
     useEffect(() => {
@@ -26,8 +27,7 @@ function Form() {
             .then((res => setPatients([...patients, ...res])))
     }, []);
 
-    const onSubmit = data => {
-        console.log(data)
+    const onSubmit = () => {
         API.post('patientRegisterAPI', '/patients', {
             body: {
                 name,
@@ -37,11 +37,12 @@ function Form() {
             }
         }).then(() => {
             setPatients([...patients, { name, birthDate, email, address }])
-        }).then(setAdd(false));
+        }).then(
+            setAdd(false),
+            setNewButton(true));
     }
 
-    const handleSubmitEdit = data => {
-        console.log(data)
+    const handleSubmitEdit = () => {
         const response = API.put('patientRegisterAPI', '/patients', {
             body: {
                 name,
@@ -74,7 +75,7 @@ function Form() {
         if (edit) {
             let editField =
                 <form onSubmit={handleSubmit(handleSubmitEdit)}>
-                    <input value={name} placeholder={name} disabled></input>
+                    <input className={styles.input} value={name} placeholder={name} disabled></input>
                     <input
                         {...register("newBirthDate", {
                             required: true,
@@ -83,6 +84,7 @@ function Form() {
                         value={newBirthDate}
                         placeholder="New Birth-Date"
                         onChange={(e) => setNewBirthDate(e.target.value)}
+                        className={styles.input}
                     />
                     <input
                         {...register("newAddress", {
@@ -92,18 +94,21 @@ function Form() {
                         value={newAddress}
                         placeholder="New Address"
                         onChange={(e) => setNewAddress(e.target.value)}
+                        className={styles.input}
                     />
                     <button>
                         Save
                     </button>
-                    {errors.newBirthDate?.type === 'required' && <span> Birth-date field is required.</span>}
-                    {errors.newBirthDate?.type === 'pattern' && <span> Invalid date, please use the format: 12/01/1994</span>}
-                    {errors.newAddress?.type === 'required' && <span> Address field is required.</span>}
-                    {
-                        errors.newAddress?.type === 'pattern' && <span> Invalid date, please use the format:
-                            Rua Exemplo, 999 - apt454, Bairro - Cidade, Estado
-                        </span>
-                    }
+                    <div className={styles.span_content}>
+                        {errors.newBirthDate?.type === 'required' && <span className={styles.span_}> Birth-date field is required.</span>}
+                        {errors.newBirthDate?.type === 'pattern' && <span className={styles.span_}> Invalid date, please use the format: 12/01/1994</span>}
+                        {errors.newAddress?.type === 'required' && <span className={styles.span_}> Address field is required.</span>}
+                        {
+                            errors.newAddress?.type === 'pattern' && <span> Invalid date, please use the format:
+                                Rua Exemplo, 999 - apt454, Bairro - Cidade, Estado
+                            </span>
+                        }
+                    </div>
                 </form>
             return editField
         } else {
@@ -116,7 +121,7 @@ function Form() {
         if (add) {
             let addField =
                 <section>
-                    <form onSubmit={handleSubmit(onSubmit)}>
+                    <form className={styles.form_add_new_patient} onSubmit={handleSubmit(onSubmit)}>
                         <input
                             {...register("name", {
                                 required: true,
@@ -125,6 +130,7 @@ function Form() {
                             value={name}
                             placeholder="Full Name"
                             onChange={(e) => setName(e.target.value)}
+                            className={styles.input}
                         />
                         <input
                             {...register("email", {
@@ -134,6 +140,7 @@ function Form() {
                             value={email}
                             placeholder="Email"
                             onChange={(e) => setEmail(e.target.value)}
+                            className={styles.input}
                         />
                         <input
                             {...register("birthDate", {
@@ -143,6 +150,7 @@ function Form() {
                             value={birthDate}
                             placeholder="Birth-Date"
                             onChange={(e) => setBirthDate(e.target.value)}
+                            className={styles.input}
                         />
                         <input
                             {...register("address", {
@@ -152,23 +160,40 @@ function Form() {
                             value={address}
                             placeholder="Address"
                             onChange={(e) => setAddress(e.target.value)}
+                            className={styles.input}
                         />
                         <button>
                             Add Patient
                         </button>
                     </form>
-                    {errors.name?.type === 'required' && <span> Name field is required.</span>}
-                    {errors.name?.type === 'pattern' && <span> Please insert your full name.</span>}
-                    {errors.email?.type === 'required' && <span> Email field is required.</span>}
-                    {errors.email?.type === 'pattern' && <span> Invalid email, please use the format: your_name@hotmail.com</span>}
-                    {errors.birthDate?.type === 'required' && <span> Birth-date field is required.</span>}
-                    {errors.birthDate?.type === 'pattern' && <span> Invalid date, please use the format: 12/01/1994</span>}
-                    {errors.address?.type === 'required' && <span> Address field is required.</span>}
-                    {errors.address?.type === 'pattern' && <span> Invalid date, please use the format:
-                        Rua Exemplo, 999 - apt454, Bairro - Cidade, Estado
-                    </span>}
+                    <div className={styles.span_content}>
+                        {errors.name?.type === 'required' && <span className={styles.span_}> Name field is required.</span>}
+                        {errors.name?.type === 'pattern' && <span className={styles.span_}> Please insert your full name.</span>}
+                        {errors.email?.type === 'required' && <span className={styles.span_}> Email field is required.</span>}
+                        {errors.email?.type === 'pattern' && <span className={styles.span_}> Invalid email, please use the format: your_name@hotmail.com</span>}
+                        {errors.birthDate?.type === 'required' && <span className={styles.span_}> Birth-date field is required.</span>}
+                        {errors.birthDate?.type === 'pattern' && <span className={styles.span_}> Invalid date, please use the format: 12/01/1994</span>}
+                        {errors.address?.type === 'required' && <span className={styles.span_}> Address field is required.</span>}
+                        {errors.address?.type === 'pattern' && <span className={styles.span_}> Invalid date, please use the format:
+                            Rua Exemplo, 999 - apt454, Bairro - Cidade, Estado
+                        </span>}
+                    </div>
                 </section>
             return addField
+        }
+    }
+
+    const addButtonNewPatient = () => {
+        if (newButton) {
+            let newPatient =
+                <button className={styles.button_add} onClick={() => {
+                    setAdd(true)
+                    setNewButton(false)
+                }}
+                >
+                    Add New Patient
+                </button>
+            return newPatient
         }
     }
 
@@ -215,10 +240,7 @@ function Form() {
                 </tbody>
             </table>
             <div>{addEditForm()}</div>
-            <button onClick={() => setAdd(true)}
-            >
-                Add New Patient
-            </button>
+            <div>{addButtonNewPatient()}</div>
             <div>
                 {addNewPatient()}
             </div>
@@ -226,4 +248,4 @@ function Form() {
     );
 }
 
-export default withAuthenticator(Form);
+export default withAuthenticator(Content);

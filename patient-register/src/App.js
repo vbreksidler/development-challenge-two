@@ -4,7 +4,8 @@ import { withAuthenticator } from '@aws-amplify/ui-react'
 import './App.css';
 import React from 'react';
 import Header from './pages/Header'
-import Form from './pages/Form'
+import Content from './pages/Content'
+import Footer from './pages/Footer'
 
 Amplify.configure(config);
 
@@ -13,7 +14,8 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <Form />
+      <Content />
+      <Footer />
     </div>
   );
 }
