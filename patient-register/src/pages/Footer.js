@@ -10,7 +10,7 @@ function Footer() {
     return (
         <section className={styles.footer}>
             <footer className={styles.fixed_footer}>
-                <div class={styles.content_footer}>
+                <div className={styles.content_footer}>
                     <p> ©VBR, 2022. Desenvolvido em Javascript, com React, e estilização com Sass.</p>
                 </div>
             </footer>

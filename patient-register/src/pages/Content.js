@@ -27,6 +27,12 @@ function Content() {
             .then((res => setPatients([...patients, ...res])))
     }, []);
 
+    const isValidEmail = (emails) => {
+        if (emails.find((e) => e === email)) {
+            setEmail('This email is already registered, try another one!')
+        }
+    }
+
     const onSubmit = () => {
         API.post('patientRegisterAPI', '/patients', {
             body: {
@@ -118,6 +124,7 @@ function Content() {
     }
 
     const addNewPatient = () => {
+        const validationEmail = patients.map(e => `${e.email}`)
         if (add) {
             let addField =
                 <section>
@@ -163,7 +170,7 @@ function Content() {
                             className={styles.input}
                         />
                         <a href="#down">
-                            <button>
+                            <button onClick={isValidEmail(validationEmail)}>
                                 Add Patient
                             </button>
                         </a>
@@ -185,7 +192,7 @@ function Content() {
         }
     }
 
-    const addButtonNewPatient = () => {
+    const addButtonAddNewPatient = () => {
         if (newButton) {
             let newPatient =
                 <button className={styles.button_add} onClick={() => {
@@ -242,11 +249,10 @@ function Content() {
                 </tbody>
             </table>
             <div>{addEditForm()}</div>
-            <div>{addButtonNewPatient()}</div>
+            <div>{addButtonAddNewPatient()}</div>
             <div>
                 {addNewPatient()}
             </div>
-            <div className={styles.down} id="down" />
         </div>
     );
 }
