@@ -73,6 +73,12 @@ button:hover {
     border-radius: .375rem;
 }
 
+button:disabled {
+    border: 1px solid #ffffff5d;
+    color: white;
+    background-color: #757575;
+}
+
 .content {
     font-size: 1.5rem;
     display: inline-block;

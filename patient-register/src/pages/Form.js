@@ -3,9 +3,10 @@ import config from '../aws-exports'
 import { withAuthenticator } from '@aws-amplify/ui-react'
 import React, { useEffect } from 'react';
 import styles from './styles.module.scss';
+import { useForm } from "react-hook-form"
+import { regexAddress, regexDate, regexEmail, regexName } from '../utils/regex'
 
 Amplify.configure(config);
-
 
 function Form() {
     const [name, setName] = React.useState('');
@@ -18,14 +19,15 @@ function Form() {
     const [newBirthDate, setNewBirthDate] = React.useState('')
     const [newAddress, setNewAddress] = React.useState('')
 
+    const { register, handleSubmit, formState: { errors } } = useForm();
 
     useEffect(() => {
         API.get('patientRegisterAPI', '/patients/name')
             .then((res => setPatients([...patients, ...res])))
     }, []);
 
-    const handleSubmit = e => {
-        e.preventDefault()
+    const onSubmit = data => {
+        console.log(data)
         API.post('patientRegisterAPI', '/patients', {
             body: {
                 name,
@@ -58,6 +60,16 @@ function Form() {
         }
     }
 
+    const handleDelete = async (patient) => {
+        const response = await API.del('patientRegisterAPI', '/patients/object' + `/${patient.name}/${patient.email}`)
+        if (response.data === 'deleted') {
+            let newPatients = patients.filter(obj => obj.name !== patient.name)
+            setPatients([...newPatients])
+        } else {
+            <div>Error</div>
+        }
+    }
+
     const addEditForm = () => {
         if (edit) {
             let editField =
@@ -76,30 +88,61 @@ function Form() {
         }
     }
 
-
-    const handleDelete = async (patient) => {
-        const response = await API.del('patientRegisterAPI', '/patients/object' + `/${patient.name}/${patient.email}`)
-        if (response.data === 'deleted') {
-            let newPatients = patients.filter(obj => obj.name !== patient.name)
-            setPatients([...newPatients])
-        } else {
-            <div>Error</div>
-        }
-    }
-
     const addNewPatient = () => {
         if (add) {
             let addField =
                 <section>
-                    <form onSubmit={handleSubmit}>
-                        <input value={name} placeholder="Name" onChange={(e) => setName(e.target.value)}></input>
-                        <input value={birthDate} placeholder="Birth-Date" onChange={(e) => setBirthDate(e.target.value)}></input>
-                        <input value={email} placeholder="Email" onChange={(e) => setEmail(e.target.value)}></input>
-                        <input value={address} placeholder="Address" onChange={(e) => setAddress(e.target.value)}></input>
+                    <form onSubmit={handleSubmit(onSubmit)}>
+                        <input
+                            {...register("name", {
+                                required: true,
+                                pattern: regexName,
+                            })}
+                            value={name}
+                            placeholder="Full Name"
+                            onChange={(e) => setName(e.target.value)}
+                        />
+                        <input
+                            {...register("email", {
+                                required: true,
+                                pattern: regexEmail,
+                            })}
+                            value={email}
+                            placeholder="Email"
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
+                        <input
+                            {...register("birthDate", {
+                                required: true,
+                                pattern: regexDate,
+                            })}
+                            value={birthDate}
+                            placeholder="Birth-Date"
+                            onChange={(e) => setBirthDate(e.target.value)}
+                        />
+                        <input
+                            {...register("address", {
+                                required: true,
+                                pattern: regexAddress,
+                            })}
+                            value={address}
+                            placeholder="Address"
+                            onChange={(e) => setAddress(e.target.value)}
+                        />
                         <button>
                             Add Patient
                         </button>
                     </form>
+                    {errors.name?.type === 'required' && <span> Name field is required.</span>}
+                    {errors.name?.type === 'pattern' && <span> Please insert your full name.</span>}
+                    {errors.email?.type === 'required' && <span> Email field is required.</span>}
+                    {errors.email?.type === 'pattern' && <span> Invalid email, please use the format: your_name@hotmail.com</span>}
+                    {errors.birthDate?.type === 'required' && <span> Birth-date field is required.</span>}
+                    {errors.birthDate?.type === 'pattern' && <span> Invalid date, please use the format: 12/01/1994</span>}
+                    {errors.address?.type === 'required' && <span> Address field is required.</span>}
+                    {errors.address?.type === 'pattern' && <span> Invalid date, please use the format:
+                        Rua Acelino Grande, 125 - casa, Santa Felicidade - Curitiba, PR
+                    </span>}
                 </section>
             return addField
         }
