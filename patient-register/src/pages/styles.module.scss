@@ -19,6 +19,17 @@ fieldset {
 html {
     font-family: Montserrat, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, BlinkMacSystemFont, Helvetica Neue, Arial, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
     line-height: 1.5;
+    scroll-behavior: smooth;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+#down {
+    margin-top: 100%;
+    padding-bottom: 25%;
 }
 
 .logo {
@@ -62,6 +73,7 @@ button {
     margin: 2px;
     padding-left: 20px;
     padding-right: 20px;
+    margin-bottom: 1%;
     height: 35px;
     background-color: transparent;
     color: #757575;
@@ -71,6 +83,7 @@ button {
 }
 
 button:hover {
+    font-weight: bolder;
     background-color: #009adf;
     color: white;
     border: 1px solid #f5f5f5;
@@ -88,6 +101,13 @@ button:active {
     background-color: #ffffff5d;
 }
 
+.button_table_del:hover {
+    font-weight: bolder;
+    border-color: red;
+    color: rgb(226, 43, 43);
+    background-color: rgba(226, 43, 43, 0.459);
+}
+
 .content {
     font-size: 1.5rem;
     display: inline-block;
@@ -95,6 +115,7 @@ button:active {
     color: #009adf;
     padding: 1%;
     margin: 1%;
+    margin-bottom: 10%;
 }
 
 .table {
@@ -121,11 +142,12 @@ th {
 }
 
 th:hover {
+    font-weight: 900;
+    color: #009adf;
     border-bottom: 2px solid #009adf;
 }
 
 td {
-    // height: 50px;
     padding: 10px;
 
     button {
@@ -136,6 +158,8 @@ td {
 }
 
 td:hover {
+    font-weight: 400;
+    color: #009adf;
     border-bottom: 1px solid #009adf;
 }
 
@@ -197,17 +221,10 @@ input {
 }
 
 .fixed_footer p {
+    font-family: Montserrat;
     color: lightgrey;
     column-count: 2;
     column-gap: 50px;
     font-size: 1em;
-    font-weight: 300;
+    font-weight: bolder;
 }
-
-// .content_footer {
-//     width: 90%;
-//     padding-top: 5px;
-//     padding-bottom: 1%;
-//     max-height: 80px;
-//     display: inline-flex;
-// }

@@ -162,15 +162,17 @@ function Content() {
                             onChange={(e) => setAddress(e.target.value)}
                             className={styles.input}
                         />
-                        <button>
-                            Add Patient
-                        </button>
+                        <a href="#down">
+                            <button>
+                                Add Patient
+                            </button>
+                        </a>
                     </form>
                     <div className={styles.span_content}>
                         {errors.name?.type === 'required' && <span className={styles.span_}> Name field is required.</span>}
                         {errors.name?.type === 'pattern' && <span className={styles.span_}> Please insert your full name.</span>}
                         {errors.email?.type === 'required' && <span className={styles.span_}> Email field is required.</span>}
-                        {errors.email?.type === 'pattern' && <span className={styles.span_}> Invalid email, please use the format: your_name@hotmail.com</span>}
+                        {errors.email?.type === 'pattern' && <span className={styles.span_}> Invalid email, please use the format: your_email@hotmail.com</span>}
                         {errors.birthDate?.type === 'required' && <span className={styles.span_}> Birth-date field is required.</span>}
                         {errors.birthDate?.type === 'pattern' && <span className={styles.span_}> Invalid date, please use the format: 12/01/1994</span>}
                         {errors.address?.type === 'required' && <span className={styles.span_}> Address field is required.</span>}
@@ -218,7 +220,7 @@ function Content() {
                             <td>{patient.email}</td>
                             <td>{patient.address}</td>
                             <td>
-                                <button className={styles.button_table} onClick={() => handleDelete(patient)}
+                                <button className={styles.button_table_del} onClick={() => handleDelete(patient)}
                                 >
                                     Delete
                                 </button>
@@ -244,6 +246,7 @@ function Content() {
             <div>
                 {addNewPatient()}
             </div>
+            <div className={styles.down} id="down" />
         </div>
     );
 }
