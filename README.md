@@ -45,7 +45,7 @@
 - To run the project: 
 
 -------------------------------
-
+	- download the project
 	- cd development-challenge-two-victor-reksidler-branch/patient-register
 	- npm install
 	- paste your aws-exports.js in development-challenge-two-victor-reksidler-branch/patient-register/src
