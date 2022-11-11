@@ -60,7 +60,7 @@
 - Front:
 	- change to state context.
 	- cancel button is only functional.
-	- when click edit button replace de add form
+	- when click edit button replace the add form
 - Back:
 	- improve the validation through AWS API Gateway.
 	- implement especific methods in AWS API Gateway.
