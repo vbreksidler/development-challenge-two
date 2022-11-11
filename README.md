@@ -19,7 +19,7 @@
           	  - AWS Lambda serveless computing;
           	  - AWS DynamoDB;
          	  - AWS API Gateway;
-                  - AWS Amplify;
+		  - AWS Amplify;
 -------------------------------
 
 - Require: 
