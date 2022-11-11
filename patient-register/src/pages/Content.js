@@ -229,44 +229,50 @@ function Content() {
     return (
         <div className={styles.content}>
             Patients Manager
-            <table className={styles.table}>
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Birth Date</th>
-                        <th>Email</th>
-                        <th>Address</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {patients.map((patient, index) =>
-                        <tr key={index}>
-                            <td>{patient.name}</td>
-                            <td>{patient.birthDate}</td>
-                            <td>{patient.email}</td>
-                            <td>{patient.address}</td>
-                            <td>
-                                <button className={styles.button_table_del} onClick={() => handleDelete(patient)}
-                                >
-                                    Delete
-                                </button>
-                            </td>
-                            <td>
-                                <button onClick={() => {
-                                    setEdit(true)
-                                    setName(patient.name)
-                                    setBirthDate(patient.birthDate)
-                                    setEmail(patient.email)
-                                    setAddress(patient.address)
-                                }}
-                                >
-                                    Edit
-                                </button>
-                            </td>
+            {patients.find((e) => e.name) === undefined && add === false ?
+                <span className={styles.span_no_data}>
+                    Sorry, we don't have any patients registered in database.
+                </span> :
+                <table className={styles.table}>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Birth Date</th>
+                            <th>Email</th>
+                            <th>Address</th>
+
                         </tr>
-                    )}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {patients.map((patient, index) =>
+                            <tr key={index}>
+                                <td>{patient.name}</td>
+                                <td>{patient.birthDate}</td>
+                                <td>{patient.email}</td>
+                                <td>{patient.address}</td>
+                                <td>
+                                    <button className={styles.button_table_del} onClick={() => handleDelete(patient)}
+                                    >
+                                        Delete
+                                    </button>
+                                </td>
+                                <td>
+                                    <button onClick={() => {
+                                        setEdit(true)
+                                        setName(patient.name)
+                                        setBirthDate(patient.birthDate)
+                                        setEmail(patient.email)
+                                        setAddress(patient.address)
+                                    }}
+                                    >
+                                        Edit
+                                    </button>
+                                </td>
+                            </tr>
+                        )}
+                    </tbody>
+                </table>
+            }
             <div>{addEditForm()}</div>
             <div>{addButtonAddNewPatient()}</div>
             <div>

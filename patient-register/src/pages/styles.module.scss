@@ -109,6 +109,7 @@ button:active {
     box-shadow: 0.5px 0.5px 0.5px 0.5px lightslategray;
     font-size: medium;
     color: #757575;
+    min-width: 800px;
     padding: 2% 2% 5% 2%;
     border: 1px solid #6363635d;
     border-radius: .375rem;
@@ -192,6 +193,12 @@ input {
     background-color: rgba(226, 43, 43, 0.267);
     border: 1px solid #6363635d;
     border-radius: .375rem;
+}
+
+.span_no_data {
+    display: flex;
+    justify-self: center;
+    margin: 2px;
 }
 
 .fixed_footer {
