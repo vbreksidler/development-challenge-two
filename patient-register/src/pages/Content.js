@@ -10,8 +10,6 @@ Amplify.configure(config);
 
 // preencher a tabela com placeholder
 
-// nao abrir add patient
-
 function Content() {
     // mudar para context se possivel
     const [name, setName] = React.useState('');
@@ -54,7 +52,7 @@ function Content() {
             setNewButton(true));
     }
 
-    const handleSubmitEdit = () => {
+    const onSubmitEdit = () => {
         const response = API.put('patientRegisterAPI', '/patients', {
             body: {
                 name,
@@ -67,7 +65,7 @@ function Content() {
             setEdit(false)
             setPatients([...patients, { name, birthDate, email, address }])
         } else {
-            <span>Edit Failed</span>
+            throw new Error
         }
     }
 
@@ -81,45 +79,55 @@ function Content() {
         }
     }
 
+    //botao de cancelar por enquanto
+    function reload() {
+        window.location.reload();
+    }
+
     const addEditForm = () => {
-        if (edit) {
+        if (edit && newButton) {
             let editField =
-                <form onSubmit={handleSubmit(handleSubmitEdit)}>
-                    <input className={styles.input} value={name} placeholder={name} disabled></input>
-                    <input
-                        {...register("newBirthDate", {
-                            required: true,
-                            pattern: regexDate,
-                        })}
-                        value={newBirthDate}
-                        placeholder="New Birth-Date"
-                        onChange={(e) => setNewBirthDate(e.target.value)}
-                        className={styles.input}
-                    />
-                    <input
-                        {...register("newAddress", {
-                            required: true,
-                            pattern: regexAddress,
-                        })}
-                        value={newAddress}
-                        placeholder="New Address"
-                        onChange={(e) => setNewAddress(e.target.value)}
-                        className={styles.input}
-                    />
-                    <button>
-                        Save
+                <div className={styles.edit_content}>
+                    <form onSubmit={handleSubmit(onSubmitEdit)}>
+                        <input className={styles.input} value={name} placeholder={name} disabled></input>
+                        <input
+                            {...register("newBirthDate", {
+                                required: true,
+                                pattern: regexDate,
+                            })}
+                            value={newBirthDate}
+                            placeholder="New Birth-Date"
+                            onChange={(e) => setNewBirthDate(e.target.value)}
+                            className={styles.input}
+                        />
+                        <input
+                            {...register("newAddress", {
+                                required: true,
+                                pattern: regexAddress,
+                            })}
+                            value={newAddress}
+                            placeholder="New Address"
+                            onChange={(e) => setNewAddress(e.target.value)}
+                            className={styles.input}
+                        />
+                        <button>
+                            Save
+                        </button>
+                        <div className={styles.span_content}>
+                            {errors.newBirthDate?.type === 'required' && <span className={styles.span_}> Birth-date field is required.</span>}
+                            {errors.newBirthDate?.type === 'pattern' && <span className={styles.span_}> Invalid date, please use the format: 12/01/1994</span>}
+                            {errors.newAddress?.type === 'required' && <span className={styles.span_}> Address field is required.</span>}
+                            {
+                                errors.newAddress?.type === 'pattern' && <span> Invalid address, please use the format:
+                                    Rua Exemplo, 999 - apt454, Bairro - Cidade, Estado
+                                </span>
+                            }
+                        </div>
+                    </form>
+                    <button onClick={reload}>
+                        Cancel
                     </button>
-                    <div className={styles.span_content}>
-                        {errors.newBirthDate?.type === 'required' && <span className={styles.span_}> Birth-date field is required.</span>}
-                        {errors.newBirthDate?.type === 'pattern' && <span className={styles.span_}> Invalid date, please use the format: 12/01/1994</span>}
-                        {errors.newAddress?.type === 'required' && <span className={styles.span_}> Address field is required.</span>}
-                        {
-                            errors.newAddress?.type === 'pattern' && <span> Invalid address, please use the format:
-                                Rua Exemplo, 999 - apt454, Bairro - Cidade, Estado
-                            </span>
-                        }
-                    </div>
-                </form>
+                </div>
             return editField
         } else {
             let editField = null
@@ -132,67 +140,73 @@ function Content() {
         const validationName = patients.map(e => `${e.name}`)
         if (add) {
             let addField =
-                <section>
-                    <form className={styles.form_add_new_patient} onSubmit={handleSubmit(onSubmit)}>
-                        <input
-                            {...register("name", {
-                                required: true,
-                                pattern: regexName,
-                            })}
-                            value={name}
-                            placeholder="Full Name"
-                            onChange={(e) => setName(e.target.value)}
-                            className={styles.input}
-                        />
-                        <input
-                            {...register("email", {
-                                required: true,
-                                pattern: regexEmail,
-                            })}
-                            value={email}
-                            placeholder="Email"
-                            onChange={(e) => setEmail(e.target.value)}
-                            className={styles.input}
-                        />
-                        <input
-                            {...register("birthDate", {
-                                required: true,
-                                pattern: regexDate,
-                            })}
-                            value={birthDate}
-                            placeholder="Birth-Date"
-                            onChange={(e) => setBirthDate(e.target.value)}
-                            className={styles.input}
-                        />
-                        <input
-                            {...register("address", {
-                                required: true,
-                                pattern: regexAddress,
-                            })}
-                            value={address}
-                            placeholder="Address"
-                            onChange={(e) => setAddress(e.target.value)}
-                            className={styles.input}
-                        />
-                        <button onClick={
-                            isValid(validationEmail, validationName)
-                        }>
-                            Add Patient
-                        </button>
-                    </form>
-                    <div className={styles.span_content}>
-                        {errors.name?.type === 'required' && <span className={styles.span_}> Name field is required.</span>}
-                        {errors.name?.type === 'pattern' && <span className={styles.span_}> Please insert your full name.</span>}
-                        {errors.email?.type === 'required' && <span className={styles.span_}> Email field is required.</span>}
-                        {errors.email?.type === 'pattern' && <span className={styles.span_}> Invalid email, please use the format: your_email@hotmail.com</span>}
-                        {errors.birthDate?.type === 'required' && <span className={styles.span_}> Birth-date field is required.</span>}
-                        {errors.birthDate?.type === 'pattern' && <span className={styles.span_}> Invalid date, please use the format: 12/01/1994</span>}
-                        {errors.address?.type === 'required' && <span className={styles.span_}> Address field is required.</span>}
-                        {errors.address?.type === 'pattern' && <span className={styles.span_}> Invalid address, please use the format:
-                            Rua Exemplo, 999 - apt454, Bairro - Cidade, Estado
-                        </span>}
-                    </div>
-                </section>
+                <div className={styles.add_content}>
+                    <section>
+                        <form className={styles.form_add_new_patient} onSubmit={handleSubmit(onSubmit)}>
+                            <input
+                                {...register("name", {
+                                    min: 6,
+                                    required: true,
+                                    pattern: regexName,
+                                })}
+                                value={name}
+                                placeholder="Full Name"
+                                onChange={(e) => setName(e.target.value)}
+                                className={styles.input}
+                            />
+                            <input
+                                {...register("email", {
+                                    required: true,
+                                    pattern: regexEmail,
+                                })}
+                                value={email}
+                                placeholder="Email"
+                                onChange={(e) => setEmail(e.target.value)}
+                                className={styles.input}
+                            />
+                            <input
+                                {...register("birthDate", {
+                                    required: true,
+                                    pattern: regexDate,
+                                })}
+                                value={birthDate}
+                                placeholder="Birth-Date"
+                                onChange={(e) => setBirthDate(e.target.value)}
+                                className={styles.input}
+                            />
+                            <input
+                                {...register("address", {
+                                    required: true,
+                                    pattern: regexAddress,
+                                })}
+                                value={address}
+                                placeholder="Address"
+                                onChange={(e) => setAddress(e.target.value)}
+                                className={styles.input}
+                            />
+                            <button onClick={
+                                isValid(validationEmail, validationName)
+                            }>
+                                Add Patient
+                            </button>
+                        </form>
+                        <div className={styles.span_content}>
+                            {errors.name?.type === 'required' && <span className={styles.span_}> Name field is required.</span>}
+                            {errors.name?.type === 'pattern' && <span className={styles.span_}> Please insert your full name.</span>}
+                            {errors.email?.type === 'required' && <span className={styles.span_}> Email field is required.</span>}
+                            {errors.email?.type === 'pattern' && <span className={styles.span_}> Invalid email, please use the format: your_email@hotmail.com</span>}
+                            {errors.birthDate?.type === 'required' && <span className={styles.span_}> Birth-date field is required.</span>}
+                            {errors.birthDate?.type === 'pattern' && <span className={styles.span_}> Invalid date, please use the format: 12/01/1994</span>}
+                            {errors.address?.type === 'required' && <span className={styles.span_}> Address field is required.</span>}
+                            {errors.address?.type === 'pattern' && <span className={styles.span_}> Invalid address, please use the format:
+                                Rua Exemplo, 999 - apt454, Bairro - Cidade, Estado
+                            </span>}
+                        </div>
+                    </section>
+                    <button onClick={reload}>
+                        Cancel
+                    </button>
+                </div>
             return addField
         }
     }

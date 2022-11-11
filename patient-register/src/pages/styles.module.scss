@@ -215,3 +215,9 @@ input {
     font-size: 1em;
     font-weight: bolder;
 }
+
+.edit_content,
+.add_content {
+    justify-content: center;
+    display: inline-flexbox
+}
