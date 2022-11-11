@@ -18,7 +18,7 @@
       "function": {
         "patientregister62741077": {
           "deploymentBucketName": "amplify-patientregister-dev-180028-deployment",
-          "s3Key": "amplify-builds/patientregister62741077-616b6541726e51463852-build.zip"
+          "s3Key": "amplify-builds/patientregister62741077-4748666555644159644e-build.zip"
         }
       },
       "storage": {

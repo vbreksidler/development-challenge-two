@@ -8,6 +8,10 @@ import { regexAddress, regexDate, regexEmail, regexName } from '../utils/regex'
 
 Amplify.configure(config);
 
+// preencher a tabela com placeholder
+
+// nao abrir add patient
+
 function Content() {
     // mudar para context se possivel
     const [name, setName] = React.useState('');
@@ -27,10 +31,12 @@ function Content() {
             .then((res => setPatients([...patients, ...res])))
     }, []);
 
-    const isValidEmail = (emails) => {
+    const isValid = (emails, names) => {
         if (emails.find((e) => e === email)) {
-            setEmail('This email is already registered, try another one!')
+            setEmail('Email is already registered')
         }
+        if (names.find((e) => e === name))
+            setName('Name is already registered')
     }
 
     const onSubmit = () => {
@@ -60,8 +66,6 @@ function Content() {
         if (response.success === "put call succeed!") {
             setEdit(false)
             setPatients([...patients, { name, birthDate, email, address }])
-            // por enquanto vou utilizar o reload para atualizar a tabela
-            window.location.reload()
         } else {
             <span>Edit Failed</span>
         }
@@ -110,7 +114,7 @@ function Content() {
                         {errors.newBirthDate?.type === 'pattern' && <span className={styles.span_}> Invalid date, please use the format: 12/01/1994</span>}
                         {errors.newAddress?.type === 'required' && <span className={styles.span_}> Address field is required.</span>}
                         {
-                            errors.newAddress?.type === 'pattern' && <span> Invalid date, please use the format:
+                            errors.newAddress?.type === 'pattern' && <span> Invalid address, please use the format:
                                 Rua Exemplo, 999 - apt454, Bairro - Cidade, Estado
                             </span>
                         }
@@ -125,6 +129,7 @@ function Content() {
 
     const addNewPatient = () => {
         const validationEmail = patients.map(e => `${e.email}`)
+        const validationName = patients.map(e => `${e.name}`)
         if (add) {
             let addField =
                 <section>
@@ -169,11 +174,11 @@ function Content() {
                             onChange={(e) => setAddress(e.target.value)}
                             className={styles.input}
                         />
-                        <a href="#down">
-                            <button onClick={isValidEmail(validationEmail)}>
-                                Add Patient
-                            </button>
-                        </a>
+                        <button onClick={
+                            isValid(validationEmail, validationName)
+                        }>
+                            Add Patient
+                        </button>
                     </form>
                     <div className={styles.span_content}>
                         {errors.name?.type === 'required' && <span className={styles.span_}> Name field is required.</span>}
@@ -183,7 +188,7 @@ function Content() {
                         {errors.birthDate?.type === 'required' && <span className={styles.span_}> Birth-date field is required.</span>}
                         {errors.birthDate?.type === 'pattern' && <span className={styles.span_}> Invalid date, please use the format: 12/01/1994</span>}
                         {errors.address?.type === 'required' && <span className={styles.span_}> Address field is required.</span>}
-                        {errors.address?.type === 'pattern' && <span className={styles.span_}> Invalid date, please use the format:
+                        {errors.address?.type === 'pattern' && <span className={styles.span_}> Invalid address, please use the format:
                             Rua Exemplo, 999 - apt454, Bairro - Cidade, Estado
                         </span>}
                     </div>
