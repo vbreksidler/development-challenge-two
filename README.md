@@ -16,24 +16,24 @@
 	 - backend:
 		  - express;
 		  - NodeJs;
-          - AWS Lambda serveless computing;
-          - AWS DynamoDB;
-          - AWS API Gateway;
-          - AWS Amplify;
+          	  - AWS Lambda serveless computing;
+          	  - AWS DynamoDB;
+         	  - AWS API Gateway;
+                  - AWS Amplify;
 
 Require
 
-You need to develop both the front-end and the back-end. (ok)
-In the front-end you MUST use React. (ok)
-In the back-end you MUST use Node.js and AWS free-tier. (ok)
-The patient data should not be static or local. (ok)
-Field validation (date, required fields, etc). (ok)
-AWS RDS MySQL, PostgreSQL or DynamoDB as database. (ok)
-AWS Lambda for serveless computing. (ok)
-AWS API Gateway for managing your REST API. (ok)
+You need to develop both the front-end and the back-end. ✔️
+In the front-end you MUST use React. ✔️
+In the back-end you MUST use Node.js and AWS free-tier. ✔️
+The patient data should not be static or local. ✔️
+Field validation (date, required fields, etc). ✔️
+AWS RDS MySQL, PostgreSQL or DynamoDB as database. ✔️
+AWS Lambda for serveless computing. ✔️
+AWS API Gateway for managing your REST API. ✔️
 
 Extra Points
 Cache the data in-browser.
 Pagination.
 Use Material UI - https://material-ui.com.
-A cool design. (ok)
+A cool design. ✔️
