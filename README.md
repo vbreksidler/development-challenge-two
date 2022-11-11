@@ -16,10 +16,10 @@
 	 - backend:
 		  - express;
 		  - NodeJs;
-          - AWS Lambda serveless computing
-          - AWS DynamoDB
-          - AWS API Gateway
-          - AWS Amplify
+          - AWS Lambda serveless computing;
+          - AWS DynamoDB;
+          - AWS API Gateway;
+          - AWS Amplify;
 
 Require
 
