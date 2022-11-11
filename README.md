@@ -45,7 +45,7 @@
 - To run the project: 
 
 -------------------------------
-	- https://github.com/vbreksidler/development-challenge-two
+	- https://github.com/vbreksidler/development-challenge-two/tree/victor-reksidler-branch
 	- download the project
 	- cd development-challenge-two-victor-reksidler-branch/patient-register
 	- npm install
