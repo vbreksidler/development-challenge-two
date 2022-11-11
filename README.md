@@ -51,4 +51,18 @@
 	- npm install
 	- paste your aws-exports.js in development-challenge-two-victor-reksidler-branch/patient-register/src
 	- npm start
-	
+
+-------------------------------
+
+melhorias:
+
+-------------------------------
+front
+	- mudar para context se possivel
+	- botao de cancelar(está apenas funcional)
+	- ao clicar botao edit substituir formulario add por edit
+back
+	- melhorar a validação através do API Gateway
+	- adicionar metodos especificos no API Gateway
+	- entender melhor a parte de autenticação da AWS(IAM e Cognito)
+-------------------------------
