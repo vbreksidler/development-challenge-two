@@ -54,15 +54,15 @@
 
 -------------------------------
 
-melhorias:
+- Improvements:
 
 -------------------------------
 front
-	- mudar para context se possivel
-	- botao de cancelar(está apenas funcional)
-	- ao clicar botao edit substituir formulario add por edit
+	- change to state context.
+	- cancel button is only functional.
+	- when click edit button replace de add form
 back
-	- melhorar a validação através do API Gateway
-	- adicionar metodos especificos no API Gateway
-	- entender melhor a parte de autenticação da AWS(IAM e Cognito)
+	- improve the validation through AWS API Gateway.
+	- implement especific methods in AWS API Gateway.
+	- need getting to know more of AWS authentication(IAM and Cognito).
 -------------------------------
