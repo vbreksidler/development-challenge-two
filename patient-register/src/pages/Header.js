@@ -7,9 +7,6 @@ import styles from './styles.module.scss';
 
 Amplify.configure(config);
 
-const cognitoId = config.aws_user_pools_id;
-const cognitoRegion = config.aws_cognito_region
-
 function Header() {
     return (
         <div>
