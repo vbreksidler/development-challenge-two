@@ -12,7 +12,6 @@ const AWS = require('aws-sdk')
 const awsServerlessExpressMiddleware = require('aws-serverless-express/middleware')
 const bodyParser = require('body-parser')
 const express = require('express')
-const Joi = require('joi');
 
 AWS.config.update({ region: process.env.TABLE_REGION });
 
@@ -23,7 +22,7 @@ if (process.env.ENV && process.env.ENV !== "NONE") {
   tableName = tableName + '-' + process.env.ENV;
 }
 
-const userIdPresent = true; // TODO: update in case is required to use that definition
+const userIdPresent = false; // TODO: update in case is required to use that definition
 const partitionKeyName = "name";
 const partitionKeyType = "S";
 const sortKeyName = "email";
@@ -71,7 +70,8 @@ app.get(path + hashKeyPath, function (req, res) {
     try {
       condition[partitionKeyName]['AttributeValueList'] = [convertUrlType(req.params[partitionKeyName], partitionKeyType)];
     } catch (err) {
-      res.statusCode(500).json({ error: 'Wrong column type ' + err });
+      res.statusCode = 500;
+      res.json({ error: 'Wrong column type ' + err });
     }
   }
 
@@ -164,42 +164,7 @@ app.put(path, function (req, res) {
 * HTTP post method for insert object *
 *************************************/
 
-const validateBody = (unknown) => {
-  const schema = Joi.object({
-    email: Joi.string().required().email(),
-  });
-  const result = schema.validate(unknown);
-  if (result.isJoi || !unknown.email) {
-    const error = new Error('Email is required.');
-    error.code = 400;
-    throw error;
-  }
-  return result;
-}
-
 app.post(path, function (req, res) {
-  const result = validateBody(req.body)
-  if (result.error) {
-    res.json(result)
-  }
-
-  const { email } = req.body
-
-  let getItemParams = {
-    ":email": { "S": email },
-  }
-
-  dynamodb.get(getItemParams, (err, data) => {
-    if (err) {
-      res.statusCode = 500;
-      res.json({ error: 'Could not load items: ' + err.message });
-    } else {
-      if (data.Item) {
-        res.json({ error: 'User already exists' });
-
-      }
-    }
-  })
 
   if (userIdPresent) {
     req.body['userId'] = req.apiGateway.event.requestContext.identity.cognitoIdentityId || UNAUTH;
