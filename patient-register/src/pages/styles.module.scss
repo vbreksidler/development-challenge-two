@@ -95,6 +95,10 @@ button:active {
     background-color: rgba(226, 43, 43, 0.459);
 }
 
+.button_cancel {
+    display: inline-block;
+}
+
 .content {
     font-size: 1.5rem;
     display: inline-block;
@@ -124,13 +128,21 @@ button:active {
     border: none;
 }
 
+.button_form {
+    margin: 5px;
+}
+
+.button_form:hover {
+    border: none;
+}
+
 th {
     padding: 2px;
     border-bottom: 2px solid #6363635d;
 }
 
 th:hover {
-    font-weight: 900;
+    font-weight: 600;
     color: #009adf;
     border-bottom: 2px solid #009adf;
 }
@@ -153,6 +165,7 @@ td:hover {
 
 .form_add_new_patient {
     display: inline-block;
+
 }
 
 .input {

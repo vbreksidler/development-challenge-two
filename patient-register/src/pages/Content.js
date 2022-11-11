@@ -110,8 +110,11 @@ function Content() {
                             onChange={(e) => setNewAddress(e.target.value)}
                             className={styles.input}
                         />
-                        <button>
+                        <button className={styles.button_form}>
                             Save
+                        </button>
+                        <button onClick={reload}>
+                            Cancel
                         </button>
                         <div className={styles.span_content}>
                             {errors.newBirthDate?.type === 'required' && <span className={styles.span_}> Birth-date field is required.</span>}
@@ -124,9 +127,6 @@ function Content() {
                             }
                         </div>
                     </form>
-                    <button onClick={reload}>
-                        Cancel
-                    </button>
                 </div>
             return editField
         } else {
@@ -184,12 +184,17 @@ function Content() {
                                 onChange={(e) => setAddress(e.target.value)}
                                 className={styles.input}
                             />
-                            <button onClick={
-                                isValid(validationEmail, validationName)
-                            }>
+                            <button
+                                className={styles.button_form}
+                                onClick={
+                                    isValid(validationEmail, validationName)
+                                }>
                                 Add Patient
                             </button>
                         </form>
+                        <button className={styles.button_form} onClick={reload}>
+                            Cancel
+                        </button>
                         <div className={styles.span_content}>
                             {errors.name?.type === 'required' && <span className={styles.span_}> Name field is required.</span>}
                             {errors.name?.type === 'pattern' && <span className={styles.span_}> Please insert your full name.</span>}
@@ -203,9 +208,6 @@ function Content() {
                             </span>}
                         </div>
                     </section>
-                    <button onClick={reload}>
-                        Cancel
-                    </button>
                 </div>
             return addField
         }
