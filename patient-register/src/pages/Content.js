@@ -8,10 +8,7 @@ import { regexAddress, regexDate, regexEmail, regexName } from '../utils/regex'
 
 Amplify.configure(config);
 
-// preencher a tabela com placeholder
-
 function Content() {
-    // mudar para context se possivel
     const [name, setName] = React.useState('');
     const [birthDate, setBirthDate] = React.useState('');
     const [email, setEmail] = React.useState('');
@@ -26,8 +23,8 @@ function Content() {
 
     useEffect(() => {
         API.get('patientRegisterAPI', '/patients/name')
-            .then((res => setPatients([...patients, ...res])))
-    }, []);
+            .then((res => setPatients([...res])))
+    }, [patients]);
 
     const isValid = (emails, names) => {
         if (emails.find((e) => e === email)) {
@@ -64,8 +61,6 @@ function Content() {
         if (response.success === "put call succeed!") {
             setEdit(false)
             setPatients([...patients, { name, birthDate, email, address }])
-        } else {
-            throw new Error
         }
     }
 
@@ -79,7 +74,6 @@ function Content() {
         }
     }
 
-    //botao de cancelar por enquanto
     function reload() {
         window.location.reload();
     }
@@ -135,7 +129,7 @@ function Content() {
         }
     }
 
-    const addNewPatient = () => {
+    const addNewPatientForm = () => {
         const validationEmail = patients.map(e => `${e.email}`)
         const validationName = patients.map(e => `${e.name}`)
         if (add) {
@@ -213,7 +207,7 @@ function Content() {
         }
     }
 
-    const addButtonAddNewPatient = () => {
+    const addButtonAddPatient = () => {
         if (newButton) {
             let newPatient =
                 <button className={styles.button_add} onClick={() => {
@@ -276,9 +270,9 @@ function Content() {
                 </table>
             }
             <div>{addEditForm()}</div>
-            <div>{addButtonAddNewPatient()}</div>
+            <div>{addButtonAddPatient()}</div>
             <div>
-                {addNewPatient()}
+                {addNewPatientForm()}
             </div>
         </div>
     );
