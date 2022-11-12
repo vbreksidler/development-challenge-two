@@ -59,6 +59,7 @@
 
 -------------------------------
 - Front:
+	- add a filter
 	- change to state context.
 	- cancel button is only functional.
 	- when click edit button replace the add form
