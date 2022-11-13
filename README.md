@@ -58,9 +58,11 @@
 		- default output format: json	
 	- npm start
 	- If you want to log in AWS Console: 
-		- https://aws.amazon.com/pt/?nc2=h_lg
+		- https://aws.amazon.com/
+		arn:aws:iam::395595043401:user/admin
+		- ID da conta: 395595043401
 		- user: admin
-		- password: Medcloud2022@
+		- password: 0l!+8k}G=(||3FA
 
 -------------------------------
 
