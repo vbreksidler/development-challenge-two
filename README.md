@@ -46,6 +46,8 @@
 	◕ https://github.com/vbreksidler/development-challenge-two/tree/victor-reksidler-branch
 	◕ download the project:
 		◑ https://github.com/vbreksidler/development-challenge-two/archive/refs/heads/victor-reksidler-branch.zip
+		◑ extract the folder
+	◕  run terminal
 	◕ cd development-challenge-two-victor-reksidler-branch/patient-register
 	◕ npm install
 	◕ aws configure
