@@ -65,13 +65,13 @@
 - Improvements:
 
 -------------------------------
-- Front:
-	- add a filter
-	- change to state context.
-	- cancel button is only functional.
-	- when click edit button replace the add form
-- Back:
-	- improve the validation through AWS API Gateway.
-	- implement especific methods in AWS API Gateway.
-	- need getting to know more of AWS authentication(IAM and Cognito).
+	- Front:
+		- add a filter
+		- change to state context.
+		- cancel button is only functional.
+		- when click edit button replace the add form
+	- Back:
+		- improve the validation through AWS API Gateway.
+		- implement especific methods in AWS API Gateway.
+		- need getting to know more of AWS authentication(IAM and Cognito).
 -------------------------------
