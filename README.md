@@ -44,10 +44,6 @@
 
 - To run the project: 
 
-user: admin
-password: Medcloud2022@
-
-
 -------------------------------
 	- https://github.com/vbreksidler/development-challenge-two/tree/victor-reksidler-branch
 	- download the project:
@@ -55,15 +51,16 @@ password: Medcloud2022@
 	- cd development-challenge-two-victor-reksidler-branch/patient-register
 	- npm install
 	- aws configure
-	
 		Use the follow access to configure yourt AWS:
-		
 		- AWS Acesss Key ID: AKIAVYG2NKJE2P2ADPPU
 		- AWS Secret Acees Key: TYbcqZmGGVonE6xE4OiBX1so3mdJaCm0bJxCCJlN
 		- default region name: sa-east-1
-		- default output format: json
-		
+		- default output format: json	
 	- npm start
+	- If you want to log in AWS Console: 
+		- https://aws.amazon.com/pt/?nc2=h_lg
+		- user: admin
+		- password: Medcloud2022@
 
 -------------------------------
 
