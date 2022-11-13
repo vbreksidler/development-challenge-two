@@ -224,7 +224,7 @@ function Content() {
 
     return (
         <div className={styles.content}>
-            Patients Manager
+            <p>Patients Manager</p>
             {patients.find((e) => e.name) === undefined && add === false ?
                 <span className={styles.span_no_data}>
                     Sorry, we don't have any patients registered in database.
