@@ -11,8 +11,7 @@
  ------------------------------
 	 - frontend: 
 		  - Javascript;
-		  - React;
-		  
+		  - React;  
 	 - backend:
 		  - express;
 		  - NodeJs;
@@ -25,7 +24,6 @@
 - Require: 
 
 -------------------------------
-
 	- You need to develop both the front-end and the back-end. ✔️
 	- In the front-end you MUST use React. ✔️
 	- In the back-end you MUST use Node.js and AWS free-tier. ✔️
@@ -34,8 +32,7 @@
 	- AWS RDS MySQL, PostgreSQL or DynamoDB as database. ✔️
 	- AWS Lambda for serveless computing. ✔️
 	- AWS API Gateway for managing your REST API. ✔️
-
-	Extra Points
+	Extra:
 	 - Cache the data in-browser.
 	 - Pagination.
 	 - Use Material UI - https://material-ui.com.
