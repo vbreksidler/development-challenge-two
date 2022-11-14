@@ -24,7 +24,7 @@ function Content() {
     useEffect(() => {
         API.get('patientRegisterAPI', '/patients/name')
             .then((res => setPatients([...res])))
-    }, [patients]);
+    }, []);
 
     const isValid = (emails, names) => {
         if (emails.find((e) => e === email)) {
