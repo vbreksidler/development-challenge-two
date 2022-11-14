@@ -67,7 +67,7 @@ Note: I uploaded the aws-exports.js file knowing it's not a good practice, but i
 
 -------------------------------
 
-● Improvements:
+● Future improvements:
 
 -------------------------------
 	◕ Front:
