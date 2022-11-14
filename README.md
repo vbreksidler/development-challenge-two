@@ -62,6 +62,8 @@
 		◑ ID da conta: 395595043401
 		◑ user: admin
 		◑ password: 0l!+8k}G=(||3FA
+		
+Note: I uploaded the aws-exports.js file knowing it's not a good practice, but it's just for the purposes of this challenge.
 
 -------------------------------
 
