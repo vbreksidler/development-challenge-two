@@ -50,6 +50,7 @@
 			◦ extract the folder
 	◕ run terminal
 	◕ cd development-challenge-two-victor-reksidler-branch/patient-register
+	◕ apt install npm
 	◕ npm install
 	◕ npm i aws
 	◕ aws configure
