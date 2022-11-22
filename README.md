@@ -44,12 +44,14 @@
 
 -------------------------------
 	◕ https://github.com/vbreksidler/development-challenge-two/tree/victor-reksidler-branch
-	◕ download the project:
-		◑ https://github.com/vbreksidler/development-challenge-two/archive/refs/heads/victor-reksidler-branch.zip
-		◑ extract the folder
-	◕  run terminal
+	◕ git clone git@github.com:vbreksidler/development-challenge-two.git
+		 or ◑ download the project:
+			◦ https://github.com/vbreksidler/development-challenge-two/archive/refs/heads/victor-reksidler-branch.zip
+			◦ extract the folder
+	◕ run terminal
 	◕ cd development-challenge-two-victor-reksidler-branch/patient-register
 	◕ npm install
+	◕ npm i aws
 	◕ aws configure
 		◑ Use the follow access to configure your AWS:
 			◦ AWS Acesss Key ID: AKIAVYG2NKJE2P2ADPPU
