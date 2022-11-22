@@ -53,7 +53,8 @@
 	◕ apt install npm
 	◕ npm install
 	◕ npm i aws
-	◕ aws configure
+	◕ aws configure 
+		(if aws configure dont run, install -> apt install awscli)
 		◑ Use the follow access to configure your AWS:
 			◦ AWS Acesss Key ID: AKIAVYG2NKJE2P2ADPPU
 			◦ AWS Secret Acees Key: TYbcqZmGGVonE6xE4OiBX1so3mdJaCm0bJxCCJlN
