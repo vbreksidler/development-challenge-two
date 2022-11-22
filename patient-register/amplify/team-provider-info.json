@@ -1,0 +1,32 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-patientregister-dev-180028-authRole",
+      "UnauthRoleArn": "arn:aws:iam::395595043401:role/amplify-patientregister-dev-180028-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::395595043401:role/amplify-patientregister-dev-180028-authRole",
+      "Region": "sa-east-1",
+      "DeploymentBucketName": "amplify-patientregister-dev-180028-deployment",
+      "UnauthRoleName": "amplify-patientregister-dev-180028-unauthRole",
+      "StackName": "amplify-patientregister-dev-180028",
+      "StackId": "arn:aws:cloudformation:sa-east-1:395595043401:stack/amplify-patientregister-dev-180028/b69c9660-5c83-11ed-b734-02154fca4a9e",
+      "AmplifyAppId": "d1xu36jhjisxht"
+    },
+    "categories": {
+      "auth": {
+        "patientregister1280e576": {}
+      },
+      "function": {
+        "patientregister62741077": {
+          "deploymentBucketName": "amplify-patientregister-dev-180028-deployment",
+          "s3Key": "amplify-builds/patientregister62741077-6d4c656437445a685765-build.zip"
+        }
+      },
+      "storage": {
+        "dynamoPatientDB": {}
+      },
+      "api": {
+        "patientRegisterAPI": {}
+      }
+    }
+  }
+}
